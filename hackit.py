@@ -2,9 +2,11 @@ __author__ = 'yaorenjie'
 
 import requests
 import re
+import sys
 
 if __name__ == '__main__':
-    resp = requests.get('http://pu.guitarworld.com.cn/q1850/')
+    n = sys.argv[1]
+    resp = requests.get('http://pu.guitarworld.com.cn/q%s/' % n)
     r = re.findall('<title>(.*)</title>', resp.content)
     title = r[0].split('-')[0].strip()
     for index, (song_id, page_id) in enumerate(re.findall('/userspace/uploadfiles/qupupic/(\d+)/thumbnail/(\d+).gif', resp.content)):
